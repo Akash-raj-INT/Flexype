@@ -118,3 +118,64 @@ Response
   "total_stock": 5,
   "available_stock": 4
 }
+
+⚠️ Edge Case Handling
+Edge Case	How It Is Handled
+Two users reserve last item	DB row locking (select_for_update)
+Reservation expires	Time validation during confirm
+Page refresh	Same reservation ID reused
+Duplicate requests	Status-based idempotency
+Backend restart	Expiry-based recovery
+🧠 Key Concepts Used
+
+@transaction.atomic for database consistency
+
+UUID-based reservation IDs
+
+Time-To-Live (TTL) reservation expiry
+
+JWT authentication & role-based access
+
+Clean service-oriented design
+
+▶️ How to Run Locally
+git clone <repo-url>
+cd inventory_system
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
+
+🧪 Testing Flow
+
+Login → Get JWT token
+
+Reserve inventory
+
+Confirm or cancel checkout
+
+Check inventory status
+
+(All APIs tested using Thunder Client)
+
+🎯 Use Cases
+
+Flash sale systems
+
+Limited stock e-commerce
+
+Ticket booking platforms
+
+Event registration systems
+
+👤 Author
+
+Akash Raj
+Computer Science Student
+Backend | Django | System Design
+
+🏁 Conclusion
+
+This project demonstrates a real-world backend system that ensures fair and consistent checkout by combining transactions, authentication, and time-bound reservations.
